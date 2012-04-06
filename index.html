@@ -63,7 +63,6 @@ $ git push -u origin develop</pre>
 						<p>When this is ready to be released:</p>
 						<pre>$ git merge --no-ff release-1.2</pre>
 						<pre>
-$ git tag -a 1.2
 $ git tag -a 1.2 -am "message"</pre>
 						<p>and we need to merge this back into develop ... will probably result in conflicts so just fix and commit</p>
 						<pre>$ git merge --no-ff release-1.2</pre>
@@ -73,7 +72,7 @@ $ git tag -a 1.2 -am "message"</pre>
 						<pre>
 $ git push origin master
 $ git push origin develop
-$ git push --tags</pre>							
+$ git push --tags</pre>
 					</li>
 					<li  class="step-6">
 						<h2>Hotfix Branches</h2>
