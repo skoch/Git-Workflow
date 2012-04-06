@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+	<head>
+		<meta chrset="utf-8" />
+		<title>Git Flow</title>
+		<link rel="stylesheet" href="css/stylesheet.css" media="all" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>Git Workflow</h1>
+			</header>
+			<article class="content">
+				<img src="branching-model.svg" alt="branching model" class="visualisation" />
+				<ol class="description">
+					<li class="step-1">
+						<p>initialize git repo</p>
+						<pre>
+$ cd my/awesome/project
+$ git commit -am "Initial commit"
+$ git remote add origin git@github.com:bigspaceship/Project-Name.git
+$ git push -u origin master</pre>
+					</li>
+					<li class="step-2">
+						<p>create development branch and push it to the server</p>
+						<pre>
+$ git checkout -b develop
+$ git push -u origin develop</pre>
+						<p>set the default branch to <em>develop</em> on github on https://github.com/bigspaceship/Project-Name/admin</p>
+					</li>
+					<li class="step-3">
+						<h2>Feature Branches</h2>
+						<ul class="rules">
+							<li>May branch off from: <strong>develop</strong></li>
+							<li>Must merge back into: <strong>develop</strong></li>
+							<li>Branch naming convention: anything except master, develop, release-*, or hotfix-*</li>
+						</ul>
+						<pre>$ git checkout -b myfeature develop</pre>
+						<p>all actual work is done here.</p>
+					</li>
+					<li class="step-4">
+						<h2>Adding new features to develop</h2>
+						<p>when the new feature is complete, checkout develop</p>
+						<pre>$ git checkout develop</pre>
+						<p>merge feature branch into development branch</p>
+						<pre>$ git merge --no-ff myfeature</pre>
+						<p>update remote development branch</p>
+						<pre>$ git push origin develop</pre>
+					</li>
+					<li  class="step-5">
+						<h2>Release Branches</h2>
+						<ul class="rules">
+							<li>May branch off from: <strong>develop</strong></li>
+							<li>Must merge back into: <strong>develop</strong> and <strong>master</strong>.</li>
+							<li>Branch naming convention: release-*</li>
+						</ul>
+						<pre>$ git checkout -b release-1.2 develop</pre>
+						<p><strong>If you do NOT yet have a README file, create it !(see below)</strong>
+						<pre>$ subl README.md</pre>
+						<p>Update the version and detail the changes as much as you can in the README file.</p>
+						<p>Bug fixes can happen here, but no features or anything</p>
+						<pre>$ git commit -am "Bumped version number to 1.2"</pre>
+						<p>When this is ready to be released:</p>
+						<pre>$ git merge --no-ff release-1.2</pre>
+						<pre>
+$ git tag -a 1.2
+$ git tag -a 1.2 -am "message"</pre>
+						<p>and we need to merge this back into develop ... will probably result in conflicts so just fix and commit</p>
+						<pre>$ git merge --no-ff release-1.2</pre>
+						<p>Now we are really done so let's get rid of it:</p>
+						<pre>$ git branch -d release-1.2</pre>
+						<p>Update the remote:</p>
+						<pre>
+$ git push origin master
+$ git push origin develop
+$ git push --tags</pre>							
+					</li>
+					<li  class="step-6">
+						<h2>Hotfix Branches</h2>
+						<ul class="rules">
+							<li>May branch off from: master</li>
+							<li>Must merge back into: develop and master</li>
+							<li>Branch naming convention: hotfix-*</li>
+						</ul>
+						<pre>$ git checkout -b hotfix-1.2.1 master</pre>
+						<pre>$ ./bump-version.sh 1.2.1</pre>
+						<pre>$ git commit -a -m "Bumped version number to 1.2.1"</pre>
+						<p>Fix bug and commit the fix in one or more commits.</p>
+						<pre>$ git commit -m "Fixed severe production problem"</pre>
+						<p>Commit to master and develop:</p>
+						<pre>$ git checkout master</pre>
+						<pre>$ git merge --no-ff hotfix-1.2.1</pre>
+						<pre>$ git tag -a 1.2.1 -am "message"</pre>
+						<pre>$ git checkout develop</pre>
+						<pre>$ git merge --no-ff hotfix-1.2.1</pre>
+					</li>
+				</ol>
+			</article>
+			<article class="extra">
+				<h1>Exceptions</h1>
+						<p>
+							The one exception to the rule here is that, when a release branch currently exists, the hotfix changes need to be merged into that release branch, instead of develop. Back-merging the bugfix into the release branch will eventually result in the bugfix being merged into develop too, when the release branch is finished. (If work in develop immediately requires this bugfix and cannot wait for the release branch to be finished, you may safely merge the bugfix into develop now already as well.)
+						</p>
+						<pre>$ git branch -d hotfix-1.2.1</pre>
+						<pre>
+$ git push origin master
+$ git push origin develop
+$ git push --tags</pre>
+				<h1>The Readme File</h1>
+						<p>Use markdown formatting or plain text. Template:</p>
+						<pre>
+/////////////////////////////////
+//////////// READ ME ////////////
+/////////////////////////////////
+
+# Project Name
+
+## Team
+* Producer: Name
+* Designers: Name
+* Technologists: Name
+
+## Releases
+
+---
+### 1.0
+* Initial release</pre>
+					</li>
+				</ul>
+			</article>
+		</div>
+	</body>
+</html>
