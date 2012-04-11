@@ -61,11 +61,14 @@ $ git push -u origin develop</pre>
 						<p>Bug fixes can happen here, but no features or anything</p>
 						<pre>$ git commit -am "Bumped version number to 1.2"</pre>
 						<p>When this is ready to be released:</p>
-						<pre>$ git merge --no-ff release-1.2</pre>
 						<pre>
-$ git tag -a 1.2 -am "message"</pre>
-						<p>and we need to merge this back into develop ... will probably result in conflicts so just fix and commit</p>
-						<pre>$ git merge --no-ff release-1.2</pre>
+$ git checkout master
+$ git merge --no-ff release-1.2</pre>
+						<p>Tag it.</p>
+						<pre>$ git tag -a 1.2 -am "message"</pre>
+						<p>and we need to merge this back into develop ... might result in conflicts so just fix and commit</p>
+						<pre>$ git checkout develop
+$ git merge --no-ff release-1.2</pre>
 						<p>Now we are really done so let's get rid of it:</p>
 						<pre>$ git branch -d release-1.2</pre>
 						<p>Update the remote:</p>
@@ -82,29 +85,39 @@ $ git push --tags</pre>
 							<li>Branch naming convention: hotfix-*</li>
 						</ul>
 						<pre>$ git checkout -b hotfix-1.2.1 master</pre>
-						<pre>$ ./bump-version.sh 1.2.1</pre>
+						<p>
+							Update the README file with just the new version number (unless this is going to be
+							a quick change and you know what the fix is and can fill in details.)
+						</p>
 						<pre>$ git commit -a -m "Bumped version number to 1.2.1"</pre>
-						<p>Fix bug and commit the fix in one or more commits.</p>
+						<p>Fix bug and commit the fix in one or more commits. Don't forget to fill in details for the README!</p>
 						<pre>$ git commit -m "Fixed severe production problem"</pre>
-						<p>Commit to master and develop:</p>
-						<pre>$ git checkout master</pre>
-						<pre>$ git merge --no-ff hotfix-1.2.1</pre>
-						<pre>$ git tag -a 1.2.1 -am "message"</pre>
-						<pre>$ git checkout develop</pre>
-						<pre>$ git merge --no-ff hotfix-1.2.1</pre>
+						<p>Commit to master, tag it and commit to develop:</p>
+						<pre>$ git checkout master
+$ git merge --no-ff hotfix-1.2.1
+$ git tag -a 1.2.1 -am "message"
+$ git checkout develop
+$ git merge --no-ff hotfix-1.2.1</pre>
+						<p>Delete the branch now that we're done with it.</p>
+						<pre>$ git branch -d hotfix-1.2.1</pre>
+						<p>update the remove.</p>
+						<pre>$ git push origin master
+$ git push origin develop
+$ git push --tags</pre>
+<h1>Exceptions</h1>
+		<p>
+			The one exception to the rule here is that, when a release branch currently exists,
+			the hotfix changes need to be merged into that release branch, instead of develop.
+			Back-merging the bugfix into the release branch will eventually result in the bugfix
+			being merged into develop too, when the release branch is finished.
+			(If work in develop immediately requires this bugfix and cannot wait
+			for the release branch to be finished, you may safely merge the bugfix into
+			develop now already as well.)
+		</p>
 					</li>
 				</ol>
 			</article>
 			<article class="extra">
-				<h1>Exceptions</h1>
-						<p>
-							The one exception to the rule here is that, when a release branch currently exists, the hotfix changes need to be merged into that release branch, instead of develop. Back-merging the bugfix into the release branch will eventually result in the bugfix being merged into develop too, when the release branch is finished. (If work in develop immediately requires this bugfix and cannot wait for the release branch to be finished, you may safely merge the bugfix into develop now already as well.)
-						</p>
-						<pre>$ git branch -d hotfix-1.2.1</pre>
-						<pre>
-$ git push origin master
-$ git push origin develop
-$ git push --tags</pre>
 				<h1>The Readme File</h1>
 						<p>Use markdown formatting or plain text. Template:</p>
 						<pre>
