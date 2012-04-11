@@ -60,6 +60,8 @@ li
 pre
 {
 	padding: 5px;
+	font-family: Monaco, Courier, monospace;
+	font-size: 11px;
 	background: rgba(0, 0, 0, 0.6);
 	color: #fff;
 	margin: 10px 0;
