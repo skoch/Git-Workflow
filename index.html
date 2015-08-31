@@ -1,145 +1,101 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta chrset="utf-8" />
-		<title>Git Flow</title>
-		<link rel="stylesheet" href="css/stylesheet.css" media="all" />
-	</head>
-	<body>
-		<div id="wrapper">
-			<header>
-				<h1>Git Workflow</h1>
-			</header>
-			<article class="content">
-				<img src="branching-model.svg" alt="branching model" class="visualisation" />
-				<ol class="description">
-					<li class="step-1">
-						<p>initialize git repo</p>
-						<pre>
-$ cd my/awesome/project
+  <head>
+    <meta chrset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Git Flow Setup</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/blog.css" rel="stylesheet">
+    <link href="css/gitflow.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link active" href="./">setup</a>
+          <a class="nav-link" href="with-gitflow.html">with git-flow</a>
+          <a class="nav-link" href="without-gitflow.html">without git-flow</a>
+          <a class="nav-link" href="readme.html">readme</a>
+          <a class="nav-link" href="graphic.html">graphic</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="blog-header">
+      <div class="container">
+        <h1 class="blog-title">Git Flow</h1>
+        <p class="lead blog-description">Using git flow -- or not</p>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <h2>Install</h2>
+        <h5>OSX - Homebrew</h5>
+        <pre>$ brew install git-flow</pre>
+        <h5>OSX - Macports</h5>
+        <pre>$ ports install git-flow</pre>
+        <h5>Linux</h5>
+        <pre>$ apt-get install git-flow</pre>
+        <h5>Windows (Cygwin)</h5>
+        <pre>$ $ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</pre>
+        <div class="alert alert-info" role="alert">
+          You need wget and util-linux to install git-flow.
+        </div>
+      </div>
+
+      <div class="row">
+        <h2>Initialize</h2>
+        <pre>
+$ cd my/project
 $ git commit -am "Initial commit"
-$ git remote add origin git@github.com:bigspaceship/Project-Name.git
+$ git remote add origin git@github.com:username/Project-Name.git
 $ git push -u origin master</pre>
-					</li>
-					<li class="step-2">
-						<p>create development branch and push it to the server</p>
-						<pre>
+      </div>
+
+      <div class="row">
+        <h2>Prepare Repository for Development</h2>
+        <p>Create development branch, push it to the server</p>
+        <pre>
 $ git checkout -b develop
 $ git push -u origin develop</pre>
-						<p>set the default branch to <em>develop</em> on github on https://github.com/bigspaceship/Project-Name/admin</p>
-					</li>
-					<li class="step-3">
-						<h2>Feature Branches</h2>
-						<ul class="rules">
-							<li>May branch off from: <strong>develop</strong></li>
-							<li>Must merge back into: <strong>develop</strong></li>
-							<li>Branch naming convention: anything except master, develop, release-*, or hotfix-*</li>
-						</ul>
-						<pre>$ git checkout -b myfeature develop</pre>
-						<p>all actual work is done here.</p>
-					</li>
-					<li class="step-4">
-						<h2>Adding new features to develop</h2>
-						<p>when the new feature is complete, checkout develop</p>
-						<pre>$ git checkout develop</pre>
-						<p>merge feature branch into development branch</p>
-						<pre>$ git merge --no-ff myfeature</pre>
-						<p>update remote development branch</p>
-						<pre>$ git push origin develop</pre>
-					</li>
-					<li  class="step-5">
-						<h2>Release Branches</h2>
-						<ul class="rules">
-							<li>May branch off from: <strong>develop</strong></li>
-							<li>Must merge back into: <strong>develop</strong> and <strong>master</strong>.</li>
-							<li>Branch naming convention: release-*</li>
-						</ul>
-						<pre>$ git checkout -b release-1.2 develop</pre>
-						<p><strong>If you do NOT yet have a README file, create it !(see below)</strong>
-						<pre>$ subl README.md</pre>
-						<p>Update the version and detail the changes as much as you can in the README file.</p>
-						<p>Bug fixes can happen here, but no features or anything</p>
-						<pre>$ git commit -am "Bumped version number to 1.2"</pre>
-						<p>When this is ready to be released:</p>
-						<pre>
-$ git checkout master
-$ git merge --no-ff release-1.2</pre>
-						<p>Tag it.</p>
-						<pre>$ git tag -a 1.2 -am "message"</pre>
-						<p>and we need to merge this back into develop ... might result in conflicts so just fix and commit</p>
-						<pre>$ git checkout develop
-$ git merge --no-ff release-1.2</pre>
-						<p>Now we are really done so let's get rid of it:</p>
-						<pre>$ git branch -d release-1.2</pre>
-						<p>Update the remote:</p>
-						<pre>
-$ git push origin master
-$ git push origin develop
-$ git push --tags</pre>
-					</li>
-					<li  class="step-6">
-						<h2>Hotfix Branches</h2>
-						<ul class="rules">
-							<li>May branch off from: master</li>
-							<li>Must merge back into: develop and master</li>
-							<li>Branch naming convention: hotfix-*</li>
-						</ul>
-						<pre>$ git checkout -b hotfix-1.2.1 master</pre>
-						<p>
-							Update the README file with just the new version number (unless this is going to be
-							a quick change and you know what the fix is and can fill in details.)
-						</p>
-						<pre>$ git commit -a -m "Bumped version number to 1.2.1"</pre>
-						<p>Fix bug and commit the fix in one or more commits. Don't forget to fill in details for the README!</p>
-						<pre>$ git commit -m "Fixed severe production problem"</pre>
-						<p>Commit to master, tag it and commit to develop:</p>
-						<pre>$ git checkout master
-$ git merge --no-ff hotfix-1.2.1
-$ git tag -a 1.2.1 -am "message"
-$ git checkout develop
-$ git merge --no-ff hotfix-1.2.1</pre>
-						<p>Delete the branch now that we're done with it.</p>
-						<pre>$ git branch -d hotfix-1.2.1</pre>
-						<p>update the remote.</p>
-						<pre>$ git push origin master
-$ git push origin develop
-$ git push --tags</pre>
-<h1>Exceptions</h1>
-		<p>
-			The one exception to the rule here is that, when a release branch currently exists,
-			the hotfix changes need to be merged into that release branch, instead of develop.
-			Back-merging the bugfix into the release branch will eventually result in the bugfix
-			being merged into develop too, when the release branch is finished.
-			(If work in develop immediately requires this bugfix and cannot wait
-			for the release branch to be finished, you may safely merge the bugfix into
-			develop now already as well.)
-		</p>
-					</li>
-				</ol>
-			</article>
-			<article class="extra">
-				<h1>The Readme File</h1>
-						<p>Use markdown formatting or plain text. Template:</p>
-						<pre>
-/////////////////////////////////
-//////////// READ ME ////////////
-/////////////////////////////////
+        <div class="alert alert-info" role="alert">
+          Make sure to set the <strong>default branch</strong> to `develop` on github!
+        </div>
+      </div>
 
-# Project Name
+      <div class="row">
+        <h2>Setup Git Flow</h2>
+        <p>You will be prompted, as seen below, for what branches you'd like to use. You can just hit `enter` for all.</p>
+        <p><em>Note: you can set a default version tag prefix if you prefer: `v_`</em></p>
+        <pre>
+$ git flow init
+Which branch should be used for bringing forth production releases?
+   - develop
+   - master
+Branch name for production releases: [master]
 
-## Team
-* Producer: Name
-* Designers: Name
-* Technologists: Name
+Which branch should be used for integration of the "next release"?
+   - develop
+Branch name for "next release" development: [develop]
 
-## Releases
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []</pre>
+      </div>
 
----
-### 1.0
-* Initial release</pre>
-					</li>
-				</ul>
-			</article>
-		</div>
-	</body>
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Built by <a href="https://twitter.com/skoch">@skoch</a>.</p>
+    </footer>
+
+
+  </body>
 </html>

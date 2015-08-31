@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta chrset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>With git-flow</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/blog.css" rel="stylesheet">
+    <link href="css/gitflow.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link" href="./">setup</a>
+          <a class="nav-link active" href="with-gitflow.html">with git-flow</a>
+          <a class="nav-link" href="without-gitflow.html">without git-flow</a>
+          <a class="nav-link" href="readme.html">readme</a>
+          <a class="nav-link" href="graphic.html">graphic</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="blog-header">
+      <div class="container">
+        <h1 class="blog-title">Git Flow</h1>
+        <p class="lead blog-description">Using git flow -- or not</p>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <h2>Developing features</h2>
+        <pre>
+$ git flow feature start my-feature
+Switched to a new branch 'feature/my-feature'
+
+Summary of actions:
+- A new branch 'feature/my-feature' was created, based on 'develop'
+- You are now on branch 'feature/my-feature'
+
+Now, start committing on your feature. When done, use:
+
+     git flow feature finish my-feature</pre>
+        <p>Develop your feature, committing your code as necessary.</p>
+        <pre>
+$ git commit -am "Pithy commit message"
+[feature/my-feature 48b1b6c] Pithy commit message
+ 1 file changed, 1 insertion(+)</pre>
+<p>We can now see that we are ready to `finish` our feature development:</p>
+<pre>
+$ git status
+On branch feature/my-feature
+nothing to commit, working directory clean
+</pre>
+        <p>Finish it!</p>
+<pre>
+$ git flow feature finish my-feature
+Switched to branch 'develop'
+Updating dcf1bfe..48b1b6c
+Fast-forward
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+Deleted branch feature/my-feature (was 48b1b6c).
+
+Summary of actions:
+- The feature branch 'feature/my-feature' was merged into 'develop'
+- Feature branch 'feature/my-feature' has been removed
+- You are now on branch 'develop'
+</pre>
+      </div>
+
+      <div class="row">
+        <h2>Releasing</h2>
+        <p>Before releasing it is wise to check for the existence of known tags so we know what to name our release:</p>
+        <pre>$ git fetch --tags</pre>
+        <h4>Start</h4>
+<pre>
+$ git flow release start 1.0
+Switched to a new branch 'release/1.0'
+
+Summary of actions:
+- A new branch 'release/1.0' was created, based on 'develop'
+- You are now on branch 'release/1.0'
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing last-minute fixes in preparing your release
+- When done, run:
+
+     git flow release finish '1.0'
+</pre>
+        <p>The very first thing you need to do is to update the version in your <a href="readme.html">README</a> file. Do it, do it now by opening the README and creating a new entry for this version (unless you can fill in the details as well):</p>
+        <pre>
+#### 1.0 - 2015-08-31
+* Initial commit</pre>
+
+        <p>Commit this using an appropriate commit message:</p>
+        <pre>$ git commit -am "Bumped version number to 1.0"</pre>
+        <p>Make any last minute updates/changes. <strong>NO FEATURE DEVELOPMENT!</strong></p>
+        <div class="alert alert-info" role="alert">
+          You will be prompted three times to enter a commit message using `vi`! The only one you will have to insert is for the tags; the other 2 can be dismissed with <code>:wq</code> (effectively using the already inserted text for the message.)
+        </div>
+        <pre>
+$ git flow release finish 1.0
+Switched to branch 'master'
+Merge made by the 'recursive' strategy.
+ test.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 test.txt
+Switched to branch 'develop'
+Merge made by the 'recursive' strategy.
+ test.txt | 1 -
+ 1 file changed, 1 deletion(-)
+Deleted branch release/1.0 (was 640d145).
+
+Summary of actions:
+- Latest objects have been fetched from 'origin'
+- Release branch has been merged into 'master'
+- The release was tagged '1.0'
+- Release branch has been back-merged into 'develop'
+- Release branch 'release/1.0' has been deleted</pre>
+        <div class="alert alert-info" role="alert">
+          You will be on the `develop` branch.
+        </div>
+        <h4>Finally, update the remotes</h4>
+        <pre>
+$ git push origin master
+$ git push origin develop
+$ git push --tags</pre>
+      </div>
+
+      <div class="row">
+        <h2>Hotfixes</h2>
+        <p>When you need to make a fix that is on a live version.</p>
+        <div class="alert alert-info" role="alert">
+          Remember to check to what tag is live before starting!
+        </div>
+        <pre>
+$ git flow hotfix start 1.0.1
+Switched to a new branch 'hotfix/1.0.1'
+
+Summary of actions:
+- A new branch 'hotfix/1.0.1' was created, based on 'master'
+- You are now on branch 'hotfix/1.0.1'
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing your hot fixes
+- When done, run:
+
+     git flow hotfix finish '1.0.1'</pre>
+        <p>Update the README file and commit:</p>
+        <pre>$ git commit -am "Bumped version number to 1.0.1"</pre>
+        <p>Fix the issue and commit those changes.</p>
+        <pre>$ git commit -am "Fixed major issue with site!"</pre>
+        <p>Finish the hotfix:</p>
+        <pre>
+$ git flow hotfix finish 1.0.1
+Switched to branch 'develop'
+Merge made by the 'recursive' strategy.
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+Deleted branch hotfix/1.0.1 (was d923720).
+
+Summary of actions:
+- Latest objects have been fetched from 'origin'
+- Hotfix branch has been merged into 'master'
+- The hotfix was tagged '1.0.1'
+- Hotfix branch has been back-merged into 'develop'
+- Hotfix branch 'hotfix/1.0.1' has been deleted</pre>
+
+          <div class="alert alert-info" role="alert">
+            You will be on the `develop` branch.
+          </div>
+          <h4>Finally, update the remotes</h4>
+          <pre>
+$ git push origin master
+$ git push origin develop
+$ git push --tags</pre>
+      </div>
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Built by <a href="https://twitter.com/skoch">@skoch</a>.</p>
+    </footer>
+
+  </body>
+</html>
