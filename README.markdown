@@ -2,6 +2,9 @@
 
 ## Versions
 
+### 2.2
+* Added anchor tags for cenvenience
+
 ### 2.1
 * Added [@nvie](https://twitter.com/nvie) to footer
 
