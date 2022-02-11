@@ -2,6 +2,9 @@
 
 ## Versions
 
+### 2.2.1 (2022-02-11)
+* Updated to use `main`
+
 ### 2.2
 * Added anchor tags for cenvenience
 
