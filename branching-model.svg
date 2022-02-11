@@ -7,17 +7,17 @@
 <g id="Layer_2">
 </g>
 <g id="Layer_1_1_">
-	
+
 		<line fill="none" stroke="#BCBEC0" stroke-width="0.5" stroke-miterlimit="10" x1="117.028" y1="151.353" x2="117.029" y2="2801.963"/>
-	
+
 		<line fill="none" stroke="#BCBEC0" stroke-width="0.5" stroke-miterlimit="10" x1="178.704" y1="336.381" x2="178.705" y2="2802.993"/>
-	
+
 		<line fill="none" stroke="#BCBEC0" stroke-width="0.5" stroke-miterlimit="10" x1="552.951" y1="274.705" x2="552.951" y2="2802.317"/>
 	<line fill="none" stroke="#BCBEC0" stroke-width="0.5" stroke-miterlimit="10" x1="614.625" y1="398.056" x2="614.625" y2="2804"/>
 	<text transform="matrix(1 0 0 1 117.0298 43.7153)" font-family="'LucidaGrande-Bold'" font-size="16.5076">LOCAL</text>
 	<text transform="matrix(1 0 0 1 552.9507 43.7153)" font-family="'LucidaGrande-Bold'" font-size="16.5076">REMOTE</text>
-	<text transform="matrix(1 0 0 1 132.042 88.9927)" fill="#ED1C24" font-family="'LucidaGrande'" font-size="18.5028">master</text>
-	<text transform="matrix(1 0 0 1 480.187 247.3442)" fill="#ED1C24" font-family="'LucidaGrande'" font-size="18.5028">origin master</text>
+	<text transform="matrix(1 0 0 1 132.042 88.9927)" fill="#ED1C24" font-family="'LucidaGrande'" font-size="18.5028">main</text>
+	<text transform="matrix(1 0 0 1 480.187 247.3442)" fill="#ED1C24" font-family="'LucidaGrande'" font-size="18.5028">origin main</text>
 	<text transform="matrix(1 0 0 1 186.0215 323.2993)" fill="#21409A" font-family="'LucidaGrande'" font-size="18.5028">develop</text>
 	<text transform="matrix(1 0 0 1 524.4448 379.6958)" fill="#21409A" font-family="'LucidaGrande'" font-size="18.5028">origin develop</text>
 	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M117.028,1132.332"/>
@@ -109,7 +109,7 @@
 	<polygon fill="#808285" stroke="#6D6E71" stroke-miterlimit="10" points="78.106,284.96 66.036,284.96 72.071,293.908 	"/>
 	<line fill="none" stroke="#6D6E71" stroke-miterlimit="10" x1="72.069" y1="81.104" x2="72.07" y2="284.928"/>
 	<text transform="matrix(-0.0017 1 -1 -0.0017 85.3589 82.6079)" fill="#808285" font-family="'LucidaGrande'" font-size="16">time</text>
-	
+
 		<text transform="matrix(-0.0017 1 -1 -0.0017 85.3589 82.6079)" fill="none" stroke="#6D6E71" stroke-miterlimit="10" font-family="'LucidaGrande'" font-size="16">time</text>
 	<polygon points="598.496,390.168 597.267,402.176 606.785,397.081 	"/>
 	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="178.705" y1="336.786" x2="597.89" y2="396.174"/>

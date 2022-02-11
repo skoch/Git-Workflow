@@ -108,7 +108,7 @@ Follow-up actions:
         </div>
         <pre>
 $ git flow release finish 1.0
-Switched to branch 'master'
+Switched to branch 'main'
 Merge made by the 'recursive' strategy.
  test.txt | 7 +++++++
  1 file changed, 7 insertions(+)
@@ -121,7 +121,7 @@ Deleted branch release/1.0 (was 640d145).
 
 Summary of actions:
 - Latest objects have been fetched from 'origin'
-- Release branch has been merged into 'master'
+- Release branch has been merged into 'main'
 - The release was tagged '1.0'
 - Release branch has been back-merged into 'develop'
 - Release branch 'release/1.0' has been deleted</pre>
@@ -130,7 +130,7 @@ Summary of actions:
         </div>
         <h4>Finally, update the remotes</h4>
         <pre>
-$ git push origin master
+$ git push origin main
 $ git push origin develop
 $ git push --tags</pre>
       </div>
@@ -147,7 +147,7 @@ $ git flow hotfix start 1.0.1
 Switched to a new branch 'hotfix/1.0.1'
 
 Summary of actions:
-- A new branch 'hotfix/1.0.1' was created, based on 'master'
+- A new branch 'hotfix/1.0.1' was created, based on 'main'
 - You are now on branch 'hotfix/1.0.1'
 
 Follow-up actions:
@@ -171,7 +171,7 @@ Deleted branch hotfix/1.0.1 (was d923720).
 
 Summary of actions:
 - Latest objects have been fetched from 'origin'
-- Hotfix branch has been merged into 'master'
+- Hotfix branch has been merged into 'main'
 - The hotfix was tagged '1.0.1'
 - Hotfix branch has been back-merged into 'develop'
 - Hotfix branch 'hotfix/1.0.1' has been deleted</pre>
@@ -181,7 +181,7 @@ Summary of actions:
           </div>
           <h4>Finally, update the remotes</h4>
           <pre>
-$ git push origin master
+$ git push origin main
 $ git push origin develop
 $ git push --tags</pre>
       </div>
