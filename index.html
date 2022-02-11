@@ -42,7 +42,7 @@
         <h5>Linux</h5>
         <pre>$ apt-get install git-flow</pre>
         <h5>Windows (Cygwin)</h5>
-        <pre>$ $ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</pre>
+        <pre>$ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</pre>
         <div class="alert alert-info" role="alert">
           You need wget and util-linux to install git-flow.
         </div>
@@ -55,7 +55,7 @@
 $ cd my/project
 $ git commit -am "Initial commit"
 $ git remote add origin git@github.com:username/Project-Name.git
-$ git push -u origin master</pre>
+$ git push -u origin main</pre>
       </div>
 
       <a name="prepare"></a>
@@ -74,13 +74,17 @@ $ git push -u origin develop</pre>
       <div class="row">
         <h2>Setup Git Flow</h2>
         <p>You will be prompted, as seen below, for what branches you'd like to use. You can just hit `enter` for all.</p>
-        <p><em>Note: you can set a default version tag prefix if you prefer: `v_`</em></p>
+        <p><strong>Notes:</strong></p>
+        <ol>
+          <li>To use the defaults you can use the `-d` flag</li>
+          <li>You can set a default version tag prefix if you prefer. eg: `v`</li>
+        </ol>
         <pre>
-$ git flow init
+$ git flow init [-d]
 Which branch should be used for bringing forth production releases?
    - develop
-   - master
-Branch name for production releases: [master]
+   - main
+Branch name for production releases: [main]
 
 Which branch should be used for integration of the "next release"?
    - develop
